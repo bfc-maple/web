@@ -5,7 +5,7 @@ server:
 spring:
 
   redis:
-    host: 47.93.193.124
+    host: xx.xx.xxx.xxx
     port: 6379
   devtools:
     restart:
@@ -15,7 +15,7 @@ spring:
   datasource:
     username: scott
     password: tiger
-    url: jdbc:mysql://47.93.193.124:3306/dev
+    url: jdbc:mysql://xx.xx.xxx.xxx:3306/dev
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 #   \u6570\u636E\u6E90\u5176\u4ED6\u914D\u7F6E
