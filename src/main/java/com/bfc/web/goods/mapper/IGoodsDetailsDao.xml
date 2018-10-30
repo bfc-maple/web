@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bfc.web.goods.dao.IGoodsDetailsDao" >
+  <resultMap id="BaseResultMap" type="com.bfc.web.goods.entity.GoodsDetailsEntity" >
+    <id column="goods_details_id" property="goodsDetailsId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="transport_money" property="transportMoney" jdbcType="DECIMAL" />
+    <result column="old_price" property="oldPrice" jdbcType="DECIMAL" />
+    <result column="month_sales" property="monthSales" jdbcType="INTEGER" />
+    <result column="early_send_time" property="earlySendTime" jdbcType="TIMESTAMP" />
+    <result column="last_send_time" property="lastSendTime" jdbcType="TIMESTAMP" />
+    <result column="goods_bad_return" property="goodsBadReturn" jdbcType="INTEGER" />
+    <result column="real_goods" property="realGoods" jdbcType="INTEGER" />
+    <result column="goods_seven_return" property="goodsSevenReturn" jdbcType="INTEGER" />
+    <result column="fast_return" property="fastReturn" jdbcType="INTEGER" />
+    <result column="package_type" property="packageType" jdbcType="VARCHAR" />
+    <result column="goods_Brand" property="goodsBrand" jdbcType="VARCHAR" />
+    <result column="sale_type" property="saleType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goods_details_id, goods_id, transport_money, old_price, month_sales, early_send_time, 
+    last_send_time, goods_bad_return, real_goods, goods_seven_return, fast_return, package_type, 
+    goods_Brand, sale_type
+  </sql>
+
+  <select id="selectByGoodsId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tab_goods_details
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_goods_details
+    where goods_details_id = #{goodsDetailsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_goods_details
+    where goods_details_id = #{goodsDetailsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bfc.web.goods.entity.GoodsDetailsEntity" >
+    insert into tab_goods_details (goods_details_id, goods_id, transport_money, 
+      old_price, month_sales, early_send_time, 
+      last_send_time, goods_bad_return, real_goods, 
+      goods_seven_return, fast_return, package_type, 
+      goods_Brand, sale_type)
+    values (#{goodsDetailsId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{transportMoney,jdbcType=DECIMAL},
+      #{oldPrice,jdbcType=DECIMAL}, #{monthSales,jdbcType=INTEGER}, #{earlySendTime,jdbcType=TIMESTAMP},
+      #{lastSendTime,jdbcType=TIMESTAMP}, #{goodsBadReturn,jdbcType=INTEGER}, #{realGoods,jdbcType=INTEGER}, 
+      #{goodsSevenReturn,jdbcType=INTEGER}, #{fastReturn,jdbcType=INTEGER}, #{packageType,jdbcType=VARCHAR}, 
+      #{goodsBrand,jdbcType=VARCHAR}, #{saleType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bfc.web.goods.entity.GoodsDetailsEntity" >
+    insert into tab_goods_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsDetailsId != null" >
+        goods_details_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="transportMoney != null" >
+        transport_money,
+      </if>
+      <if test="oldPrice != null" >
+        old_price,
+      </if>
+      <if test="monthSales != null" >
+        month_sales,
+      </if>
+      <if test="earlySendTime != null" >
+        early_send_time,
+      </if>
+      <if test="lastSendTime != null" >
+        last_send_time,
+      </if>
+      <if test="goodsBadReturn != null" >
+        goods_bad_return,
+      </if>
+      <if test="realGoods != null" >
+        real_goods,
+      </if>
+      <if test="goodsSevenReturn != null" >
+        goods_seven_return,
+      </if>
+      <if test="fastReturn != null" >
+        fast_return,
+      </if>
+      <if test="packageType != null" >
+        package_type,
+      </if>
+      <if test="goodsBrand != null" >
+        goods_Brand,
+      </if>
+      <if test="saleType != null" >
+        sale_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsDetailsId != null" >
+        #{goodsDetailsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="transportMoney != null" >
+        #{transportMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="oldPrice != null" >
+        #{oldPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="monthSales != null" >
+        #{monthSales,jdbcType=INTEGER},
+      </if>
+      <if test="earlySendTime != null" >
+        #{earlySendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastSendTime != null" >
+        #{lastSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsBadReturn != null" >
+        #{goodsBadReturn,jdbcType=INTEGER},
+      </if>
+      <if test="realGoods != null" >
+        #{realGoods,jdbcType=INTEGER},
+      </if>
+      <if test="goodsSevenReturn != null" >
+        #{goodsSevenReturn,jdbcType=INTEGER},
+      </if>
+      <if test="fastReturn != null" >
+        #{fastReturn,jdbcType=INTEGER},
+      </if>
+      <if test="packageType != null" >
+        #{packageType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsBrand != null" >
+        #{goodsBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="saleType != null" >
+        #{saleType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bfc.web.goods.entity.GoodsDetailsEntity" >
+    update tab_goods_details
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="transportMoney != null" >
+        transport_money = #{transportMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="oldPrice != null" >
+        old_price = #{oldPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="monthSales != null" >
+        month_sales = #{monthSales,jdbcType=INTEGER},
+      </if>
+      <if test="earlySendTime != null" >
+        early_send_time = #{earlySendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastSendTime != null" >
+        last_send_time = #{lastSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsBadReturn != null" >
+        goods_bad_return = #{goodsBadReturn,jdbcType=INTEGER},
+      </if>
+      <if test="realGoods != null" >
+        real_goods = #{realGoods,jdbcType=INTEGER},
+      </if>
+      <if test="goodsSevenReturn != null" >
+        goods_seven_return = #{goodsSevenReturn,jdbcType=INTEGER},
+      </if>
+      <if test="fastReturn != null" >
+        fast_return = #{fastReturn,jdbcType=INTEGER},
+      </if>
+      <if test="packageType != null" >
+        package_type = #{packageType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsBrand != null" >
+        goods_Brand = #{goodsBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="saleType != null" >
+        sale_type = #{saleType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where goods_details_id = #{goodsDetailsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bfc.web.goods.entity.GoodsDetailsEntity" >
+    update tab_goods_details
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      transport_money = #{transportMoney,jdbcType=DECIMAL},
+      old_price = #{oldPrice,jdbcType=DECIMAL},
+      month_sales = #{monthSales,jdbcType=INTEGER},
+      early_send_time = #{earlySendTime,jdbcType=TIMESTAMP},
+      last_send_time = #{lastSendTime,jdbcType=TIMESTAMP},
+      goods_bad_return = #{goodsBadReturn,jdbcType=INTEGER},
+      real_goods = #{realGoods,jdbcType=INTEGER},
+      goods_seven_return = #{goodsSevenReturn,jdbcType=INTEGER},
+      fast_return = #{fastReturn,jdbcType=INTEGER},
+      package_type = #{packageType,jdbcType=VARCHAR},
+      goods_Brand = #{goodsBrand,jdbcType=VARCHAR},
+      sale_type = #{saleType,jdbcType=VARCHAR}
+    where goods_details_id = #{goodsDetailsId,jdbcType=INTEGER}
+  </update>
+</mapper>

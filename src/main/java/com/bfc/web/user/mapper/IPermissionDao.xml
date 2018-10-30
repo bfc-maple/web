@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bfc.web.user.dao.IPermissionDao" >
+  <resultMap id="BaseResultMap" type="com.bfc.web.user.entity.PermissionEntity" >
+    <id column="permission_id" property="permissionId" jdbcType="INTEGER" />
+    <result column="parent_Permission_id" property="parentPermissionId" jdbcType="INTEGER" />
+    <result column="Permission_name" property="permissionName" jdbcType="VARCHAR" />
+    <result column="Permission_description" property="permissionDescription" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    permission_id, parent_Permission_id, Permission_name, Permission_description, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_Permission
+    where permission_id = #{permissionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_Permission
+    where permission_id = #{permissionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bfc.web.user.entity.PermissionEntity" >
+    insert into tab_Permission (permission_id, parent_Permission_id, 
+      Permission_name, Permission_description, 
+      create_time)
+    values (#{permissionId,jdbcType=INTEGER}, #{parentPermissionId,jdbcType=INTEGER}, 
+      #{permissionName,jdbcType=VARCHAR}, #{permissionDescription,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bfc.web.user.entity.PermissionEntity" >
+    insert into tab_Permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="permissionId != null" >
+        permission_id,
+      </if>
+      <if test="parentPermissionId != null" >
+        parent_Permission_id,
+      </if>
+      <if test="permissionName != null" >
+        Permission_name,
+      </if>
+      <if test="permissionDescription != null" >
+        Permission_description,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="permissionId != null" >
+        #{permissionId,jdbcType=INTEGER},
+      </if>
+      <if test="parentPermissionId != null" >
+        #{parentPermissionId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionName != null" >
+        #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionDescription != null" >
+        #{permissionDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bfc.web.user.entity.PermissionEntity" >
+    update tab_Permission
+    <set >
+      <if test="parentPermissionId != null" >
+        parent_Permission_id = #{parentPermissionId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionName != null" >
+        Permission_name = #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionDescription != null" >
+        Permission_description = #{permissionDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where permission_id = #{permissionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bfc.web.user.entity.PermissionEntity" >
+    update tab_Permission
+    set parent_Permission_id = #{parentPermissionId,jdbcType=INTEGER},
+      Permission_name = #{permissionName,jdbcType=VARCHAR},
+      Permission_description = #{permissionDescription,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where permission_id = #{permissionId,jdbcType=INTEGER}
+  </update>
+</mapper>

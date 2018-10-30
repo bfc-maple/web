@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bfc.web.user.dao.IGroupPremissionDao" >
+  <resultMap id="BaseResultMap" type="com.bfc.web.user.entity.GroupPremissionEntity" >
+    <id column="group_perssion_id" property="groupPerssionId" jdbcType="INTEGER" />
+    <result column="permission_id" property="permissionId" jdbcType="INTEGER" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="perssion_type" property="perssionType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    group_perssion_id, permission_id, group_id, perssion_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_group_permission
+    where group_perssion_id = #{groupPerssionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_group_permission
+    where group_perssion_id = #{groupPerssionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bfc.web.user.entity.GroupPremissionEntity" >
+    insert into tab_group_permission (group_perssion_id, permission_id, group_id, 
+      perssion_type)
+    values (#{groupPerssionId,jdbcType=INTEGER}, #{permissionId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, 
+      #{perssionType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bfc.web.user.entity.GroupPremissionEntity" >
+    insert into tab_group_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupPerssionId != null" >
+        group_perssion_id,
+      </if>
+      <if test="permissionId != null" >
+        permission_id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="perssionType != null" >
+        perssion_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupPerssionId != null" >
+        #{groupPerssionId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionId != null" >
+        #{permissionId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="perssionType != null" >
+        #{perssionType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bfc.web.user.entity.GroupPremissionEntity" >
+    update tab_group_permission
+    <set >
+      <if test="permissionId != null" >
+        permission_id = #{permissionId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="perssionType != null" >
+        perssion_type = #{perssionType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where group_perssion_id = #{groupPerssionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bfc.web.user.entity.GroupPremissionEntity" >
+    update tab_group_permission
+    set permission_id = #{permissionId,jdbcType=INTEGER},
+      group_id = #{groupId,jdbcType=INTEGER},
+      perssion_type = #{perssionType,jdbcType=INTEGER}
+    where group_perssion_id = #{groupPerssionId,jdbcType=INTEGER}
+  </update>
+</mapper>

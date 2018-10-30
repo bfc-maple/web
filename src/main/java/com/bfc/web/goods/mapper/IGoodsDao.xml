@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bfc.web.goods.dao.IGoodsDao">
+    <resultMap id="BaseResultMap" type="com.bfc.web.goods.entity.GoodsEntity">
+        <id column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="store_id" property="storeId" jdbcType="INTEGER"/>
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="goods_type" property="goodsType" jdbcType="VARCHAR"/>
+        <result column="goods_title" property="goodsTitle" jdbcType="VARCHAR"/>
+        <result column="goods_price" property="goodsPrice" jdbcType="DECIMAL"/>
+        <result column="buy_count" property="buyCount" jdbcType="INTEGER"/>
+        <result column="is_shipping" property="isShipping" jdbcType="INTEGER"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="picture" property="picture" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="is_online" property="isOnline" jdbcType="INTEGER"/>
+        <result column="is_stock" property="isStock" jdbcType="INTEGER"/>
+        <result column="del" property="del" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    goods_id, store_id, goods_name, goods_type, goods_title, goods_price, buy_count, 
+    is_shipping, address, picture, create_time, update_time, is_online, is_stock, del
+  </sql>
+
+    <select id="selectGoods" resultMap="BaseResultMap" parameterType="com.bfc.web.goods.model.GoodsParamsModel">
+        select
+        <include refid="Base_Column_List"/>
+        from tab_goods
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tab_goods
+        where goods_id = #{goodsId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tab_goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.bfc.web.goods.entity.GoodsEntity">
+    insert into tab_goods (goods_id, store_id, goods_name, 
+      goods_type, goods_title, goods_price, 
+      buy_count, is_shipping, address, 
+      picture, create_time, update_time, 
+      is_online, is_stock, del
+      )
+    values (#{goodsId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
+      #{goodsType,jdbcType=VARCHAR}, #{goodsTitle,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL},
+      #{buyCount,jdbcType=INTEGER}, #{isShipping,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isOnline,jdbcType=INTEGER}, #{isStock,jdbcType=INTEGER}, #{del,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.bfc.web.goods.entity.GoodsEntity">
+        insert into tab_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="storeId != null">
+                store_id,
+            </if>
+            <if test="goodsName != null">
+                goods_name,
+            </if>
+            <if test="goodsType != null">
+                goods_type,
+            </if>
+            <if test="goodsTitle != null">
+                goods_title,
+            </if>
+            <if test="goodsPrice != null">
+                goods_price,
+            </if>
+            <if test="buyCount != null">
+                buy_count,
+            </if>
+            <if test="isShipping != null">
+                is_shipping,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="picture != null">
+                picture,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="isOnline != null">
+                is_online,
+            </if>
+            <if test="isStock != null">
+                is_stock,
+            </if>
+            <if test="del != null">
+                del,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="storeId != null">
+                #{storeId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsName != null">
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsType != null">
+                #{goodsType,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsTitle != null">
+                #{goodsTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsPrice != null">
+                #{goodsPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="buyCount != null">
+                #{buyCount,jdbcType=INTEGER},
+            </if>
+            <if test="isShipping != null">
+                #{isShipping,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null">
+                #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isOnline != null">
+                #{isOnline,jdbcType=INTEGER},
+            </if>
+            <if test="isStock != null">
+                #{isStock,jdbcType=INTEGER},
+            </if>
+            <if test="del != null">
+                #{del,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bfc.web.goods.entity.GoodsEntity">
+        update tab_goods
+        <set>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsName != null">
+                goods_name = #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsType != null">
+                goods_type = #{goodsType,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsTitle != null">
+                goods_title = #{goodsTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsPrice != null">
+                goods_price = #{goodsPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="buyCount != null">
+                buy_count = #{buyCount,jdbcType=INTEGER},
+            </if>
+            <if test="isShipping != null">
+                is_shipping = #{isShipping,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null">
+                picture = #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isOnline != null">
+                is_online = #{isOnline,jdbcType=INTEGER},
+            </if>
+            <if test="isStock != null">
+                is_stock = #{isStock,jdbcType=INTEGER},
+            </if>
+            <if test="del != null">
+                del = #{del,jdbcType=INTEGER},
+            </if>
+        </set>
+        where goods_id = #{goodsId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bfc.web.goods.entity.GoodsEntity">
+    update tab_goods
+    set store_id = #{storeId,jdbcType=INTEGER},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_type = #{goodsType,jdbcType=VARCHAR},
+      goods_title = #{goodsTitle,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      buy_count = #{buyCount,jdbcType=INTEGER},
+      is_shipping = #{isShipping,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_online = #{isOnline,jdbcType=INTEGER},
+      is_stock = #{isStock,jdbcType=INTEGER},
+      del = #{del,jdbcType=INTEGER}
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+</mapper>

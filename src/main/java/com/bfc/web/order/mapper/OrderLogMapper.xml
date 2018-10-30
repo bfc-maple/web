@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bfc.web.order.dao.IOrderLogDao" >
+  <resultMap id="BaseResultMap" type="com.bfc.web.order.entity.OrderLogEntity" >
+    <id column="order_log_id" property="orderLogId" jdbcType="INTEGER" />
+    <result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+    <result column="order_location" property="orderLocation" jdbcType="VARCHAR" />
+    <result column="order_operation" property="orderOperation" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_log_id, order_code, order_location, order_operation, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_order_log
+    where order_log_id = #{orderLogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_order_log
+    where order_log_id = #{orderLogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bfc.web.order.entity.OrderLogEntity" >
+    insert into tab_order_log (order_log_id, order_code, order_location, 
+      order_operation, create_time)
+    values (#{orderLogId,jdbcType=INTEGER}, #{orderCode,jdbcType=VARCHAR}, #{orderLocation,jdbcType=VARCHAR}, 
+      #{orderOperation,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bfc.web.order.entity.OrderLogEntity" >
+    insert into tab_order_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderLogId != null" >
+        order_log_id,
+      </if>
+      <if test="orderCode != null" >
+        order_code,
+      </if>
+      <if test="orderLocation != null" >
+        order_location,
+      </if>
+      <if test="orderOperation != null" >
+        order_operation,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderLogId != null" >
+        #{orderLogId,jdbcType=INTEGER},
+      </if>
+      <if test="orderCode != null" >
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderLocation != null" >
+        #{orderLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="orderOperation != null" >
+        #{orderOperation,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bfc.web.order.entity.OrderLogEntity" >
+    update tab_order_log
+    <set >
+      <if test="orderCode != null" >
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderLocation != null" >
+        order_location = #{orderLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="orderOperation != null" >
+        order_operation = #{orderOperation,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_log_id = #{orderLogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bfc.web.order.entity.OrderLogEntity" >
+    update tab_order_log
+    set order_code = #{orderCode,jdbcType=VARCHAR},
+      order_location = #{orderLocation,jdbcType=VARCHAR},
+      order_operation = #{orderOperation,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where order_log_id = #{orderLogId,jdbcType=INTEGER}
+  </update>
+</mapper>

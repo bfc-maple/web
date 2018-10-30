@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bfc.web.user.dao.IRolePermissionDao" >
+  <resultMap id="BaseResultMap" type="com.bfc.web.user.entity.RolePermissionEntity" >
+    <id column="role_perssion_id" property="rolePerssionId" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="permission_id" property="permissionId" jdbcType="INTEGER" />
+    <result column="perssion_type" property="perssionType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    role_perssion_id, role_id, permission_id, perssion_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_role_Permission
+    where role_perssion_id = #{rolePerssionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_role_Permission
+    where role_perssion_id = #{rolePerssionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bfc.web.user.entity.RolePermissionEntity" >
+    insert into tab_role_Permission (role_perssion_id, role_id, permission_id, 
+      perssion_type)
+    values (#{rolePerssionId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{permissionId,jdbcType=INTEGER}, 
+      #{perssionType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bfc.web.user.entity.RolePermissionEntity" >
+    insert into tab_role_Permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rolePerssionId != null" >
+        role_perssion_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="permissionId != null" >
+        permission_id,
+      </if>
+      <if test="perssionType != null" >
+        perssion_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rolePerssionId != null" >
+        #{rolePerssionId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionId != null" >
+        #{permissionId,jdbcType=INTEGER},
+      </if>
+      <if test="perssionType != null" >
+        #{perssionType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bfc.web.user.entity.RolePermissionEntity" >
+    update tab_role_Permission
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionId != null" >
+        permission_id = #{permissionId,jdbcType=INTEGER},
+      </if>
+      <if test="perssionType != null" >
+        perssion_type = #{perssionType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where role_perssion_id = #{rolePerssionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bfc.web.user.entity.RolePermissionEntity" >
+    update tab_role_Permission
+    set role_id = #{roleId,jdbcType=INTEGER},
+      permission_id = #{permissionId,jdbcType=INTEGER},
+      perssion_type = #{perssionType,jdbcType=INTEGER}
+    where role_perssion_id = #{rolePerssionId,jdbcType=INTEGER}
+  </update>
+</mapper>

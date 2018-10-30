@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bfc.web.goods.dao.IGoodsAssessDao" >
+
+
+
+  <resultMap id="BaseResultMap" type="com.bfc.web.goods.entity.GoodsAssessEntity" >
+    <id column="goods_assess_id" property="goodsAssessId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+    <result column="client_level" property="clientLevel" jdbcType="DOUBLE" />
+    <result column="find_type" property="findType" jdbcType="INTEGER" />
+    <result column="visited_count" property="visitedCount" jdbcType="INTEGER" />
+    <result column="agree_count" property="agreeCount" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bfc.web.goods.entity.GoodsAssessWithBLOBsEntity" extends="BaseResultMap" >
+    <result column="assess_content" property="assessContent" jdbcType="LONGVARCHAR" />
+    <result column="append_assess_content" property="appendAssessContent" jdbcType="LONGVARCHAR" />
+    <result column="boss_reply" property="bossReply" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goods_assess_id, goods_id, client_name, client_level, find_type, visited_count, agree_count, 
+    create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    assess_content, append_assess_content, boss_reply
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tab_goods_assess
+    where goods_assess_id = #{goodsAssessId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_goods_assess
+    where goods_assess_id = #{goodsAssessId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bfc.web.goods.entity.GoodsAssessWithBLOBsEntity" >
+    insert into tab_goods_assess (goods_assess_id, goods_id, client_name, 
+      client_level, find_type, visited_count, 
+      agree_count, create_time, update_time, 
+      assess_content, append_assess_content, 
+      boss_reply)
+    values (#{goodsAssessId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{clientName,jdbcType=VARCHAR}, 
+      #{clientLevel,jdbcType=DOUBLE}, #{findType,jdbcType=INTEGER}, #{visitedCount,jdbcType=INTEGER}, 
+      #{agreeCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{assessContent,jdbcType=LONGVARCHAR}, #{appendAssessContent,jdbcType=LONGVARCHAR}, 
+      #{bossReply,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bfc.web.goods.entity.GoodsAssessWithBLOBsEntity" >
+    insert into tab_goods_assess
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsAssessId != null" >
+        goods_assess_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="clientName != null" >
+        client_name,
+      </if>
+      <if test="clientLevel != null" >
+        client_level,
+      </if>
+      <if test="findType != null" >
+        find_type,
+      </if>
+      <if test="visitedCount != null" >
+        visited_count,
+      </if>
+      <if test="agreeCount != null" >
+        agree_count,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="assessContent != null" >
+        assess_content,
+      </if>
+      <if test="appendAssessContent != null" >
+        append_assess_content,
+      </if>
+      <if test="bossReply != null" >
+        boss_reply,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsAssessId != null" >
+        #{goodsAssessId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="clientName != null" >
+        #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="clientLevel != null" >
+        #{clientLevel,jdbcType=DOUBLE},
+      </if>
+      <if test="findType != null" >
+        #{findType,jdbcType=INTEGER},
+      </if>
+      <if test="visitedCount != null" >
+        #{visitedCount,jdbcType=INTEGER},
+      </if>
+      <if test="agreeCount != null" >
+        #{agreeCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assessContent != null" >
+        #{assessContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="appendAssessContent != null" >
+        #{appendAssessContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bossReply != null" >
+        #{bossReply,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bfc.web.goods.entity.GoodsAssessWithBLOBsEntity" >
+    update tab_goods_assess
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="clientName != null" >
+        client_name = #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="clientLevel != null" >
+        client_level = #{clientLevel,jdbcType=DOUBLE},
+      </if>
+      <if test="findType != null" >
+        find_type = #{findType,jdbcType=INTEGER},
+      </if>
+      <if test="visitedCount != null" >
+        visited_count = #{visitedCount,jdbcType=INTEGER},
+      </if>
+      <if test="agreeCount != null" >
+        agree_count = #{agreeCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assessContent != null" >
+        assess_content = #{assessContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="appendAssessContent != null" >
+        append_assess_content = #{appendAssessContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bossReply != null" >
+        boss_reply = #{bossReply,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where goods_assess_id = #{goodsAssessId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bfc.web.goods.entity.GoodsAssessWithBLOBsEntity" >
+    update tab_goods_assess
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      client_name = #{clientName,jdbcType=VARCHAR},
+      client_level = #{clientLevel,jdbcType=DOUBLE},
+      find_type = #{findType,jdbcType=INTEGER},
+      visited_count = #{visitedCount,jdbcType=INTEGER},
+      agree_count = #{agreeCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      assess_content = #{assessContent,jdbcType=LONGVARCHAR},
+      append_assess_content = #{appendAssessContent,jdbcType=LONGVARCHAR},
+      boss_reply = #{bossReply,jdbcType=LONGVARCHAR}
+    where goods_assess_id = #{goodsAssessId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bfc.web.goods.entity.GoodsAssessEntity" >
+    update tab_goods_assess
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      client_name = #{clientName,jdbcType=VARCHAR},
+      client_level = #{clientLevel,jdbcType=DOUBLE},
+      find_type = #{findType,jdbcType=INTEGER},
+      visited_count = #{visitedCount,jdbcType=INTEGER},
+      agree_count = #{agreeCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where goods_assess_id = #{goodsAssessId,jdbcType=INTEGER}
+  </update>
+</mapper>

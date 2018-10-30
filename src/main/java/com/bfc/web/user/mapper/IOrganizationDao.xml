@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bfc.web.user.dao.IOrganizationDao" >
+  <resultMap id="BaseResultMap" type="com.bfc.web.user.entity.OrganizationEntity" >
+    <id column="org_id" property="orgId" jdbcType="INTEGER" />
+    <result column="parent_org_id" property="parentOrgId" jdbcType="INTEGER" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="org_description" property="orgDescription" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    org_id, parent_org_id, org_name, create_time, org_description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_organization
+    where org_id = #{orgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_organization
+    where org_id = #{orgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bfc.web.user.entity.OrganizationEntity" >
+    insert into tab_organization (org_id, parent_org_id, org_name, 
+      create_time, org_description)
+    values (#{orgId,jdbcType=INTEGER}, #{parentOrgId,jdbcType=INTEGER}, #{orgName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{orgDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bfc.web.user.entity.OrganizationEntity" >
+    insert into tab_organization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="parentOrgId != null" >
+        parent_org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="orgDescription != null" >
+        org_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="parentOrgId != null" >
+        #{parentOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgDescription != null" >
+        #{orgDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bfc.web.user.entity.OrganizationEntity" >
+    update tab_organization
+    <set >
+      <if test="parentOrgId != null" >
+        parent_org_id = #{parentOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgDescription != null" >
+        org_description = #{orgDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where org_id = #{orgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bfc.web.user.entity.OrganizationEntity" >
+    update tab_organization
+    set parent_org_id = #{parentOrgId,jdbcType=INTEGER},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      org_description = #{orgDescription,jdbcType=VARCHAR}
+    where org_id = #{orgId,jdbcType=INTEGER}
+  </update>
+</mapper>
